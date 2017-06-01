@@ -8,6 +8,11 @@ import { SignupComponent } from './signup/signup.component';
 
 import { AngularFireModule } from 'angularfire2';
 
+import { LoginComponent } from './login/login.component';
+import { MembersComponent } from './members/members.component';
+import { EmailComponent } from './email/email.component';
+import {routes} from "./app.routes";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0",
   authDomain: "r3auth.firebaseapp.com",
@@ -20,13 +25,17 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent
+    SignupComponent,
+    LoginComponent,
+    MembersComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    routes
 
   ],
   providers: [],
