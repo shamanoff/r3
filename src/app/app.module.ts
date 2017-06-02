@@ -10,16 +10,17 @@ import { AngularFireModule } from 'angularfire2';
 
 import { LoginComponent } from './login/login.component';
 import { MembersComponent } from './members/members.component';
-import { EmailComponent } from './email/email.component';
-import {routes} from "./app.routes";
+import {routes} from './app.routes';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0",
-  authDomain: "r3auth.firebaseapp.com",
-  databaseURL: "https://r3auth.firebaseio.com",
-  projectId: "r3auth",
-  storageBucket: "r3auth.appspot.com",
-  messagingSenderId: "378959722272"
+  apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
+  authDomain: 'r3auth.firebaseapp.com',
+  databaseURL: 'https://r3auth.firebaseio.com',
+  projectId: 'r3auth',
+  storageBucket: 'r3auth.appspot.com',
+  messagingSenderId: '378959722272'
 };
 
 @NgModule({
@@ -28,13 +29,15 @@ export const firebaseConfig = {
     SignupComponent,
     LoginComponent,
     MembersComponent,
-    EmailComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     routes
 
   ],
