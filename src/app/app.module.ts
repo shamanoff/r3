@@ -13,6 +13,7 @@ import { MembersComponent } from './members/members.component';
 import {routes} from './app.routes';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AuthService} from './shared/auth.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -41,7 +42,7 @@ export const firebaseConfig = {
     routes
 
   ],
-  providers: [],
+  providers: [ AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
