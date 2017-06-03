@@ -12,19 +12,20 @@ export class LoginComponent implements OnInit {
   state = '';
   error: any;
   constructor(public _af: AngularFireAuth, private router: Router, private _authServ: AuthService) {
-/*    this._af.authState.subscribe(auth => {
+    this._af.authState.subscribe(auth => {
       if (auth) {
         this.router.navigate(['/members']);
       }
-    });*/
+    });
+    console.log(_authServ.currentUserId);
   }
 
   onSubmit(formData) {
     if (formData.valid) {
       this._authServ.emailLogin(formData.value.email, formData.value.password).then(
-        (success) => {
-          console.log(success);
-          this.router.navigate(['/members']);
+        res => {
+          console.log('success');
+          this.router.navigateByUrl('/members');
         }).catch(
         (err) => {
           console.log(err);
