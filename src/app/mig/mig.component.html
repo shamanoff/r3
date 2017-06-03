@@ -1,0 +1,6 @@
+
+<div *ngFor="let feed of feeds"  >
+  <h4>{{feed.title}}</h4>
+  <p>{{feed.pubDate | date: 'dd-MM-yyyy'}}</p>
+  <p>{{feed.description }}</p>
+</div>

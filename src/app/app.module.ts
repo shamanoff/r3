@@ -17,6 +17,8 @@ import {AuthService} from './shared/auth.service';
 import {AuthGuard} from './shared/guard.service';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import {FeedService} from "./feeds/feed.service";
+import { MigComponent } from './mig/mig.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -35,6 +37,7 @@ export const firebaseConfig = {
     MembersComponent,
     HeaderComponent,
     HomeComponent,
+    MigComponent,
 
   ],
   imports: [
@@ -47,7 +50,7 @@ export const firebaseConfig = {
     routes
 
   ],
-  providers: [ AuthService, AuthGuard],
+  providers: [ AuthService, AuthGuard, FeedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
