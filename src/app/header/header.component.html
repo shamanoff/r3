@@ -1,0 +1,29 @@
+<div class="row expanded ">
+  <div class="small-12 columns top-bar head">
+    <div class="top-bar-left">
+      <ul class="menu menu-hover-lines">
+
+        <li class="menu-text"><img src="../../assets/images/aliya_logo.svg" alt="" class="logo"/></li>
+        <li class="menu-text"><img src="../../assets/images/text.svg" alt="" class="text"/></li>
+        <!--<li class="menu-text">Русскоязычная Община Израиля</li>-->
+        <li  routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a  [routerLink]="['/']">Главная</a></li>
+        <li routerLinkActive="active"><a href="#">О Нас</a></li>
+        <li routerLinkActive="active"><a href="#">Новости</a></li>
+      </ul>
+    </div>
+
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li *ngIf="!_authServ.authenticated" routerLinkActive="active"><a [routerLink]="['/signup']" class="side"><i class="fi-pencil"></i>
+           Регистрация</a></li>
+        <li *ngIf="!_authServ.authenticated" routerLinkActive="active"><a [routerLink]="['/login']" class="side"><i class="fi-unlock"></i>
+           Вход</a></li>
+
+        <li *ngIf="_authServ.authenticated" routerLinkActive="active"><a [routerLink]="['/members']" class="side"><i class="fi-torso"></i>
+          Профиль</a></li>
+        <li *ngIf="_authServ.authenticated" routerLinkActive="active"><a  class="side" (click)="_authServ.signOut()"><i class="fi-x-circle"></i>
+          Выход</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,8 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AuthService} from './shared/auth.service';
 import {AuthGuard} from './shared/guard.service';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -31,6 +33,8 @@ export const firebaseConfig = {
     SignupComponent,
     LoginComponent,
     MembersComponent,
+    HeaderComponent,
+    HomeComponent,
 
   ],
   imports: [
