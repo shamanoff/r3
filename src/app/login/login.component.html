@@ -1,7 +1,7 @@
 <div class="row align-center">
   <div class="small-12 medium-6 columns">
     <div class="card">
-      <h2>Log In</h2>
+      <h2>Вход</h2>
       <!--form-->
       <form #formData='ngForm' novalidate
             (ngSubmit)="onSubmit(formData)"
@@ -11,7 +11,7 @@
           <input [ngClass]="{'has-error': emailMessage}" class="form-control"
                  id="emailId"
                  type="email"
-                 placeholder="Email"
+                 placeholder="Почта"
                  formControlName="email">
           <!--error-->
           <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
@@ -22,15 +22,16 @@
           <input [ngClass]="{'has-error': passwordMessage}" class="form-control"
                  id="passwordlId"
                  type="password"
-                 placeholder="Password"
+                 placeholder="Пароль"
                  formControlName="password">
           <!--error-->
-          <span class="error" *ngIf="passwordMessage">{{ passwordMessage }}</span>
+          <span class="error" *ngIf="passwordMessage">{{ passwordMessage  }}</span>
+          <span class="error" *ngIf="error">{{ error.message }}</span>
         </div>
         <!--button-->
         <div class="fields">
-          <button type="submit" class="button expanded" [disabled]="!signUpForm.valid">
-            Log in
+          <button type="submit" class="button expanded" [disabled]="!loginForm.valid && loginForm.touched">
+            Войти
           </button>
         </div>
       </form>

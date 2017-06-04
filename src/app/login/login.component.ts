@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
   private validationMessages = {
     required: 'This field is required.',
     minlength: 'Must be longer than 6 characters.',
-    email: 'Please enter a valid email address.'
+    email: 'Please enter a valid email address.',
+
   };
 
   constructor(public _af: AngularFireAuth, private router: Router, private _authServ: AuthService, private _fb: FormBuilder) {
@@ -36,11 +37,9 @@ export class LoginComponent implements OnInit {
     if (formData.valid) {
       this._authServ.emailLogin(formData.value.email, formData.value.password).then(
         res => {
-          console.log('success');
           this.router.navigateByUrl('/members');
         }).catch(
         (err) => {
-          console.log(err);
           this.error = err;
         });
     }

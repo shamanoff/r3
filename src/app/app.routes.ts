@@ -7,7 +7,7 @@ import {MembersComponent} from './members/members.component';
 // import { AuthGuard } from './auth.service';
 import {SignupComponent} from './signup/signup.component';
 import {AuthGuard} from './shared/guard.service';
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent} from './home/home.component';
 // import { EmailComponent } from './email/email.component';
 
 export const router: Routes = [

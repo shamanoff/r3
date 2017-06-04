@@ -3,9 +3,13 @@ export interface FeedEntry {
   link: string,
   guid: string,
   pubDate: Date,
-  categories: Array<string>,
   author: string,
   thumbnail: string,
   description: string,
-  content: string
+  enclosure: {
+    link: string,
+    type: string
+  },
+  categories: Array<string>
+
 }
