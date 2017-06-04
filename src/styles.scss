@@ -2,3 +2,27 @@
 body{
   background-color: ghostwhite;
 }
+
+.has-error{
+  border: 1px solid tomato;
+  color: tomato;
+
+}
+.error{
+  color: tomato;
+  //position: absolute;
+  margin-top:-5px;
+}
+.fields{
+  //min-height:70px;
+  //border: 1px solid gainsboro;
+  padding-bottom:1rem;
+}
+.fields input{
+  margin:0;
+
+}
+.card{
+  margin-top:2rem;
+  padding:2rem;
+}

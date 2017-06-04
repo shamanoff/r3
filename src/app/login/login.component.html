@@ -1,13 +1,39 @@
-<h2>Log in</h2>
+<div class="row align-center">
+  <div class="small-12 medium-6 columns">
+    <div class="card">
+      <h2>Log In</h2>
+      <!--form-->
+      <form #formData='ngForm' novalidate
+            (ngSubmit)="onSubmit(formData)"
+            [formGroup]="loginForm">
+        <!--email-->
+        <div class="fields">
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 id="emailId"
+                 type="email"
+                 placeholder="Email"
+                 formControlName="email">
+          <!--error-->
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
 
-
-<form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
-
-  <input type="text" placeholder="Email" (ngModel)="email"
-         name="email"  required>
-  <input type="password" placeholder="Password" (ngModel)="password"
-         name="password"  required>
-
-  <button type="submit" class="button" [disabled]="!formData.valid" >
-    Log In</button>
-</form>
+        <!--password-->
+        <div class="fields">
+          <input [ngClass]="{'has-error': passwordMessage}" class="form-control"
+                 id="passwordlId"
+                 type="password"
+                 placeholder="Password"
+                 formControlName="password">
+          <!--error-->
+          <span class="error" *ngIf="passwordMessage">{{ passwordMessage }}</span>
+        </div>
+        <!--button-->
+        <div class="fields">
+          <button type="submit" class="button expanded" [disabled]="!signUpForm.valid">
+            Log in
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
