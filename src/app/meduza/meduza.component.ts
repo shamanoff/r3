@@ -1,18 +1,19 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {FeedEntry} from "../feeds/model/feed-entry";
+import {Component, Input, OnInit} from '@angular/core';
 import {FeedService} from "../feeds/feed.service";
+import {FeedEntry} from "../feeds/model/feed-entry";
+import 'rxjs/add/operator/take';
 
 @Component({
-  selector: 'app-mig',
-  templateUrl: './mig.component.html',
-  styleUrls: ['./mig.component.scss']
+  selector: 'app-meduza',
+  templateUrl: './meduza.component.html',
+  styleUrls: ['./meduza.component.scss']
 })
-export class MigComponent implements OnInit {
+export class MeduzaComponent implements OnInit {
 
   @Input() feed: any;
 
 
-  private feedUrl: string = 'http%3A%2F%2Fmignews.com%2Fexport%2Fmig_export2.html';
+  private feedUrl: string = 'https%3A%2F%2Fmeduza.io%2Frss%2Farticles&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=13';
   feeds: Array<FeedEntry> = [];
   constructor(private _feedService: FeedService) { }
 
@@ -31,4 +32,5 @@ export class MigComponent implements OnInit {
   openLinkInBrowser() {
     window.open(this.feed.link);
   }
+
 }

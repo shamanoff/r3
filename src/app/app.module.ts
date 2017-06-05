@@ -19,6 +19,8 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import {FeedService} from "./feeds/feed.service";
 import { MigComponent } from './mig/mig.component';
+import { MeduzaComponent } from './meduza/meduza.component';
+import { FixedPipe } from './shared/fixed.pipe';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -38,6 +40,8 @@ export const firebaseConfig = {
     HeaderComponent,
     HomeComponent,
     MigComponent,
+    MeduzaComponent,
+    FixedPipe,
 
   ],
   imports: [
