@@ -1,0 +1,11 @@
+<div class="wrap" *ngFor="let feed of feeds" [ngStyle]="{'background-image': 'url(' + feed.enclosure.link + ')'}">
+
+  <div class="gradient">
+    <a href="{{feed.link}}">
+
+      <span class="date">{{feed.pubDate | date: 'dd-MM-yyyy'}} | israelinfo.co.il</span>
+      <h4 class="title">{{feed.title}}</h4>
+      <p class="subtitle">{{feed.description }}</p>
+    </a>
+  </div>
+</div>

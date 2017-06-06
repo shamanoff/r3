@@ -25,6 +25,7 @@ import { NepComponent } from './nep/nep.component';
 import { MarkerComponent } from './marker/marker.component';
 import { NewsruComponent } from './newsru/newsru.component';
 import { FooterComponent } from './footer/footer.component';
+import { CursorComponent } from './israelinfo/israelinfo.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -50,6 +51,7 @@ export const firebaseConfig = {
     MarkerComponent,
     NewsruComponent,
     FooterComponent,
+    CursorComponent,
 
   ],
   imports: [
