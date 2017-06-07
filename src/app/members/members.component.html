@@ -1,2 +1,5 @@
-<p>
-{{ userName}}</p>
+<p>{{ userId}}</p>
+<!--<p>{{ user.name}}</p>-->
+
+<input type="text" [(ngModel)]="input" #name>
+<input type="button" class="button" (click)="setUserName(name.value)" value="send">

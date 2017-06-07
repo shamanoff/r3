@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AuthService {
@@ -54,7 +55,6 @@ export class AuthService {
   }
 
 
-
   // Returns true if user is logged in
   get authenticated(): boolean {
     return this.authState !== null;
@@ -82,9 +82,15 @@ export class AuthService {
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authState) { return 'Guest'; }
-    else if (this.currentUserAnonymous) { return 'Anonymous'; }
-    else { return this.authState['displayName'] || 'User without a Name'; }
+    if (!this.authState) {
+      return 'Guest';
+    }
+    else if (this.currentUserAnonymous) {
+      return 'Anonymous';
+    }
+    else {
+      return this.authState['displayName'] || 'User without a Name';
+    }
   }
 
 
@@ -103,6 +109,22 @@ export class AuthService {
     this.db.object(path).update(data)
       .catch(error => console.log(error));
 
+  }
+
+  setName(userName: string) {
+    const path = `users/${this.currentUserId}`; // Endpoint on firebase
+    const data = {
+      email: this.authState.email,
+      name: userName
+    };
+
+    this.db.object(path).update(data)
+      .catch(error => console.log(error));
+
+  }
+
+  getUser(id: string){
+    return this.db.object('/users/'+ id);
   }
 
 }
