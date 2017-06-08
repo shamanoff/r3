@@ -1,5 +1,10 @@
 <p>{{ userId}}</p>
-<!--<p>{{ user.name}}</p>-->
+
+<div *ngFor="let user of users">
+  <h2>{{user.name}}</h2>
+  <!--<h1>{{(users | async) | json}}</h1>-->
+
+</div>
 
 <input type="text" [(ngModel)]="input" #name>
 <input type="button" class="button" (click)="setUserName(name.value)" value="send">
