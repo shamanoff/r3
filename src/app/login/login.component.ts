@@ -91,8 +91,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this._fb.group({
-      email: ['', [Validators.email, Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(3)]]
+      email: ['', [Validators.email, Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
     const emailControl = this.loginForm.get('email');
     emailControl.valueChanges.debounceTime(1000).subscribe(
@@ -102,8 +102,6 @@ export class LoginComponent implements OnInit {
     passwordControl.valueChanges.debounceTime(1000).subscribe(
       value => this.setPasswordMessage(passwordControl)
     );
-
-
   }
 
 
