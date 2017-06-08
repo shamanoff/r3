@@ -108,6 +108,7 @@ export class LoginComponent implements OnInit {
 
 
   setEmailMessage(c: AbstractControl): void {
+    this.notFound = false;
     this.emailMessage = '';
     if ((c.touched || c.dirty) && c.errors) {
       this.emailMessage = Object.keys(c.errors)
@@ -118,6 +119,7 @@ export class LoginComponent implements OnInit {
   }
 
   setPasswordMessage(c: AbstractControl): void {
+    this.invalid = false;
     this.passwordMessage = '';
     if ((c.touched || c.dirty) && c.errors) {
       this.passwordMessage = Object.keys(c.errors)
