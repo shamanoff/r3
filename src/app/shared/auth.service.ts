@@ -1,12 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
-import 'rxjs/add/operator/do';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthService {
-  authState: any = null;
+  loginError: string;
+
+  authState: any = '';
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
@@ -25,7 +27,7 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log('signup - '+ error.message));
   }
 
   emailLogin(email: string, password: string) {
@@ -34,8 +36,11 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+    // .catch(error => console.log(error.message));
+    .catch(error => this.loginError = error.message);
+
   }
+
 
   // Sends email allowing user to reset password
   resetPassword(email: string) {
@@ -53,6 +58,7 @@ export class AuthService {
     this.afAuth.auth.signOut();
     this.router.navigate(['/']);
   }
+
 
 
   // Returns true if user is logged in
@@ -82,15 +88,9 @@ export class AuthService {
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authState) {
-      return 'Guest';
-    }
-    else if (this.currentUserAnonymous) {
-      return 'Anonymous';
-    }
-    else {
-      return this.authState['displayName'] || 'User without a Name';
-    }
+    if (!this.authState) { return 'Guest'; }
+    else if (this.currentUserAnonymous) { return 'Anonymous'; }
+    else { return this.authState['displayName'] || 'User without a Name'; }
   }
 
 
@@ -109,22 +109,6 @@ export class AuthService {
     this.db.object(path).update(data)
       .catch(error => console.log(error));
 
-  }
-
-  setName(userName: string) {
-    const path = `users/${this.currentUserId}`; // Endpoint on firebase
-    const data = {
-      email: this.authState.email,
-      name: userName
-    };
-
-    this.db.object(path).update(data)
-      .catch(error => console.log(error));
-
-  }
-
-  getUser(id: string){
-    return this.db.object('/users/'+ id);
   }
 
 }
