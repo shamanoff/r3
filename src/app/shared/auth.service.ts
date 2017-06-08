@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthService {
-  authState: any = null;
+  loginError: string;
+
+  authState: any = '';
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
@@ -24,7 +27,7 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log('signup - '+ error.message));
   }
 
   emailLogin(email: string, password: string) {
@@ -33,8 +36,11 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-      .catch(error => console.log(error));
+    // .catch(error => console.log(error.message));
+    .catch(error => this.loginError = error.message);
+
   }
+
 
   // Sends email allowing user to reset password
   resetPassword(email: string) {
