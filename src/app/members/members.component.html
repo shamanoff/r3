@@ -1,10 +1,87 @@
-<p>{{ userId}}</p>
+<div class="row expanded container ">
+  <div class="small-12 medium-3 columns ">
+    <div class="card">
+      <h4>Новая публикация</h4>
+    </div>
+  </div>
 
-<div *ngFor="let user of users">
-  <h2>{{user.name}}</h2>
-  <!--<h1>{{(users | async) | json}}</h1>-->
+  <div class="small-12 medium-6 columns">
+    <div class="card">
+      <h4>Ваши публикации</h4>
+    </div>
+  </div>
 
+  <div class="small-12 medium-3 columns">
+    <div *ngIf="editing" class="card edit">
+      <h4>Персональные данные</h4>
+      <span>Все данные скрыты для посетителей, кроме вашего имени и фотографии. Обязательно заполните все.</span>
+      <hr>
+      <form #formData='ngForm' novalidate
+            (ngSubmit)="onSubmit(formData)"
+            [formGroup]="editForm">
+        <div>
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 type="text"
+                 placeholder="Имя и Фамилия"
+                 formControlName="userName">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <!--email-->
+        <div >
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 id="emailId"
+                 type="email"
+                 placeholder="Почта"
+                 formControlName="email">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <div>
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 type="text"
+                 placeholder="Телефон"
+                 formControlName="phone">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <div>
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 type="text"
+                 placeholder="Возраст"
+                 formControlName="age">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <span>Адрес необходим для организации работы на местах. Заполните поля на АНГЛИЙСКОМ языке.</span>
+        <hr>
+        <div>
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 type="text"
+                 placeholder="City"
+                 formControlName="city">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <div>
+          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
+                 type="text"
+                 placeholder="Street, House Number"
+                 formControlName="street">
+          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        </div>
+        <button type="submit" class="button expanded" [disabled]="!signUpForm.valid && signUpForm.touched">
+          Отправить
+        </button>
+      </form>
+    </div>
+    <div *ngIf="!editing" class="card">
+      <h4>Персональные данные</h4>
+      <hr>
+      <p>Имя: {{ userName }}</p>
+      <p>Почта: {{ userEmail }}</p>
+      <p>Телефон: {{ phone }}</p>
+      <p>Возраст: {{ userAge }}</p>
+      <p>Город: {{ city }}</p>
+      <p>Улица: {{street}}</p>
+      <hr>
+      <input type="button" class="button" value="Редактировать" (click)="editing = true">
+    </div>
+
+  </div>
 </div>
-
-<input type="text" [(ngModel)]="input" #name>
-<input type="button" class="button" (click)="setUserName(name.value)" value="send">

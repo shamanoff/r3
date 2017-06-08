@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,9 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-      .catch(error => console.log('signup - '+ error.message));
+      // .catch(error => console.log('signup - ' + error.message));
+  .catch(error => console.log(error));
+
   }
 
   emailLogin(email: string, password: string) {
@@ -36,8 +38,8 @@ export class AuthService {
         this.authState = user;
         this.updateUserData();
       })
-    // .catch(error => console.log(error.message));
-    .catch(error => this.loginError = error.message);
+    .catch(error => console.log(error));
+    // .catch(error => this.loginError = error.message);
 
   }
 

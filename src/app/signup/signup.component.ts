@@ -24,7 +24,9 @@ export class SignupComponent implements OnInit {
     email: 'Please enter a valid email address.'
   };
 
-  constructor(public _af: AngularFireAuth, public router: Router, private _authServ: AuthService, private _fb: FormBuilder) { }
+  constructor(public _af: AngularFireAuth,
+              public router: Router, private _authServ: AuthService,
+              private _fb: FormBuilder) { }
 
   onSubmit(formData) {
     if (formData.valid) {

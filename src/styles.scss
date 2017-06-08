@@ -2,6 +2,10 @@
 $primary-color: #3568cc;
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
 $roboto: 'Roboto Condensed', sans-serif;
+
+$global-flexbox: true;
+
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $roboto;
   font-weight: bold;
@@ -37,5 +41,11 @@ body{
 .card{
   margin-top:2rem;
   padding:2rem;
+  -webkit-box-shadow: 0px 5px 5px -4px rgba(0,0,0,0.58);
+  -moz-box-shadow: 0px 5px 5px -4px rgba(0,0,0,0.58);
+  box-shadow: 0px 5px 5px -4px rgba(0,0,0,0.58);
 
  }
+.container{
+  min-height: 47.6rem;
+}
