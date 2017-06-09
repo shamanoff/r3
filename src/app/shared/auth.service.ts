@@ -2,20 +2,23 @@ import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
   loginError: string;
 
-  authState: any = '';
+  private _authState: any = '';
+
+  set authState(value: any) {
+    this._authState = value;
+  }
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private router: Router) {
 
     this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth;
+      this._authState = auth;
     });
   }
 
@@ -24,7 +27,7 @@ export class AuthService {
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user;
+        this._authState = user;
         this.updateUserData();
       })
       // .catch(error => console.log('signup - ' + error.message));
@@ -35,7 +38,7 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user;
+        this._authState = user;
         this.updateUserData();
       })
     .catch(error => console.log(error));
@@ -65,12 +68,12 @@ export class AuthService {
 
   // Returns true if user is logged in
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this._authState !== null;
   }
 
   // Returns current user data
   get currentUser(): any {
-    return this.authenticated ? this.authState : null;
+    return this.authenticated ? this._authState : null;
   }
 
   // Returns
@@ -80,19 +83,19 @@ export class AuthService {
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this._authState.uid : '';
   }
 
   // Anonymous User
   get currentUserAnonymous(): boolean {
-    return this.authenticated ? this.authState.isAnonymous : false;
+    return this.authenticated ? this._authState.isAnonymous : false;
   }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authState) { return 'Guest'; }
+    if (!this._authState) { return 'Guest'; }
     else if (this.currentUserAnonymous) { return 'Anonymous'; }
-    else { return this.authState['displayName'] || 'User without a Name'; }
+    else { return this._authState['displayName'] || 'User without a Name'; }
   }
 
 
@@ -104,8 +107,8 @@ export class AuthService {
 
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const data = {
-      email: this.authState.email,
-      name: this.authState.displayName
+      email: this._authState.email,
+      name: this._authState.displayName
     };
 
     this.db.object(path).update(data)

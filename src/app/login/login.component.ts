@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/members']);
       }
     });
-    console.log(_authServ.currentUserId);
   }
 
   onSubmit(formData) {
@@ -49,27 +48,26 @@ export class LoginComponent implements OnInit {
     if (formData.valid) {
       // response is valid
       this._af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password)
-                 .then(
-       res => {
-       this.router.navigateByUrl('/members');
-
+       .then(
+         (user) => {
+         this._authServ.authState(user);
+       // this.router.navigateByUrl('/members');
        })
-       .catch(err =>{
-         if(err.message == this.fireUserNotFound){
+       .catch(err => {
+         if(err.message === this.fireUserNotFound){
            this.notFound = true;
          }
-         if(err.message == this.firePasswordIncorect){
+         if(err.message === this.firePasswordIncorect){
            this.invalid = true;
          }
 
        }
 
-       )
+       );
     }
   }
 
-/*
-  onSubmit(formData) {
+/*  onSubmit(formData) {
     // form is valid
     if (formData.valid) {
       // response is valid
@@ -95,16 +93,16 @@ export class LoginComponent implements OnInit {
     });
     const emailControl = this.loginForm.get('email');
     emailControl.valueChanges.debounceTime(1000).subscribe(
-      value => this.setEmailMessage(emailControl)
+      value => this.setEmailMsg(emailControl)
     );
     const passwordControl = this.loginForm.get('password');
     passwordControl.valueChanges.debounceTime(1000).subscribe(
-      value => this.setPasswordMessage(passwordControl)
+      value => this.setPasswordMsg(passwordControl)
     );
   }
 
 
-  setEmailMessage(c: AbstractControl): void {
+  setEmailMsg(c: AbstractControl): void {
     this.notFound = false;
     this.emailMessage = '';
     if ((c.touched || c.dirty) && c.errors) {
@@ -115,7 +113,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  setPasswordMessage(c: AbstractControl): void {
+  setPasswordMsg(c: AbstractControl): void {
     this.invalid = false;
     this.passwordMessage = '';
     if ((c.touched || c.dirty) && c.errors) {

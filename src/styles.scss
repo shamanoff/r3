@@ -17,6 +17,8 @@ p, span, a, button{
 }
 body{
   background-color: ghostwhite;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .has-error{

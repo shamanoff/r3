@@ -26,6 +26,7 @@ import { MarkerComponent } from './marker/marker.component';
 import { NewsruComponent } from './newsru/newsru.component';
 import { FooterComponent } from './footer/footer.component';
 import { CursorComponent } from './israelinfo/israelinfo.component';
+import { SamoComponent } from './samo/samo.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -52,6 +53,7 @@ export const firebaseConfig = {
     NewsruComponent,
     FooterComponent,
     CursorComponent,
+    SamoComponent,
 
   ],
   imports: [
