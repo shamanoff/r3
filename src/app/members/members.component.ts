@@ -39,12 +39,15 @@ export class MembersComponent implements OnInit, AfterViewInit {
 
   };
   currentUser = {
+    userPic: 'http://i.imgur.com/cTxSCbr.png',
     userName: '',
     email: '',
     phone: '',
     age: '',
     city: '',
-    street: ''
+    street: '',
+    lat: '',
+    lng: ''
   };
 
   editing = false;
@@ -111,6 +114,13 @@ export class MembersComponent implements OnInit, AfterViewInit {
     this.getUser();
     this.editing = false;
     this.getCoordinates();
+    this.setCoordinatesToFire();
   }
 
+  setCoordinatesToFire(){
+    const lat = _.get(this.coordinates, 'lat');
+    const lng = _.get(this.coordinates, 'lng');
+
+    console.log(this.coordinates)
+  }
 }

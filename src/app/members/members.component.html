@@ -2,6 +2,7 @@
   <div class="small-12 medium-3 columns ">
     <div class="card">
       <h4>Новая публикация</h4>
+
     </div>
   </div>
 
@@ -18,6 +19,28 @@
       <span>Обязательно заполните все поля.</span>
       <hr>
       <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+        <div>
+          <label>Фото профиля
+            <span *ngIf="(uPic.touched || uPic.dirty) && uPic.errors">
+                            <span class="has-error" *ngIf="uPic.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uPic.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uPic.touched || uPic.dirty) && uPic.errors}" class="form-control"
+                   type="text"
+                   [(ngModel)]="currentUser.userPic"
+                   value="{{currentUser.userPic}}"
+                   name="userPic"
+                   #uPic="ngModel"
+                   required
+                   minlength="3">
+
+          </label>
+        </div>
+
         <div>
           <label>Имя и Фамилия
             <span *ngIf="(uName.touched || uName.dirty) && uName.errors">
@@ -161,6 +184,9 @@
     <div *ngIf="!editing" class="card">
       <h4>Персональные данные</h4>
       <hr>
+      <p>Фото профиля</p>
+      <div id="userPic" [ngStyle]="{'background-image': 'url(' + currentUser.userPic + ')'}"></div>
+
       <p>Имя: {{currentUser.userName}}</p>
       <p>Почта: {{ currentUser.email }}</p>
       <p>Телефон: {{ currentUser.phone }}</p>
