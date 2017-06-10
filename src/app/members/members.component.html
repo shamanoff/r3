@@ -169,7 +169,19 @@
       <p>Улица: {{currentUser.street}}</p>
       <hr>
       <input type="button" class="button" value="Редактировать" (click)="editing = true">
+      <hr>
+      <div >
+        <h4>Координаты</h4>
+        <p>Latitude: {{coordinates.lat}} | Longitude: {{coordinates.lng}}</p>
+        <hr>
+        <sebm-google-map class="map" [latitude]="coordinates.lat" [longitude]="coordinates.lng" [zoom]="18">
+          <sebm-google-map-marker [latitude]="coordinates.lat" [longitude]="coordinates.lng">
+          </sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
     </div>
+
+
 
   </div>
 </div>

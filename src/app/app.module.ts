@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 
 import { AngularFireModule } from 'angularfire2';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { LoginComponent } from './login/login.component';
 import { MembersComponent } from './members/members.component';
@@ -17,7 +18,7 @@ import {AuthService} from './shared/auth.service';
 import {AuthGuard} from './shared/guard.service';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import {FeedService} from "./feeds/feed.service";
+import {FeedService} from './feeds/feed.service';
 import { MigComponent } from './mig/mig.component';
 import { MeduzaComponent } from './meduza/meduza.component';
 import { FixedPipe } from './shared/fixed.pipe';
@@ -27,6 +28,7 @@ import { NewsruComponent } from './newsru/newsru.component';
 import { FooterComponent } from './footer/footer.component';
 import { CursorComponent } from './israelinfo/israelinfo.component';
 import { SamoComponent } from './samo/samo.component';
+import {GoogleMapService} from "./shared/google-map.service";
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -64,10 +66,14 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
-    routes
+    routes,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyATbHLEJIxXo3yLBciyu5I8mFKIo6Ewjgw',
+      libraries: ["places"]
+    }),
 
   ],
-  providers: [ AuthService, AuthGuard, FeedService],
+  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
