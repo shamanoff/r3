@@ -14,7 +14,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements OnInit{
+export class MembersComponent implements OnInit, AfterViewInit {
 
 
   // form
@@ -53,56 +53,13 @@ export class MembersComponent implements OnInit{
               private router: Router,
               private _db: AngularFireDatabase,
               private _fb: FormBuilder) {
-/*    this.user = _af.authState;
-    this.user.subscribe(
-      value => {
-        this.userEmail = value.email;
-      }
-    );*/
-
   }
-
   ngOnInit() {
     this.userId = this._authServ.currentUserId;
+  }
+  ngAfterViewInit(): void {
     this.getUser();
-    this.editForm = this._fb.group({
-      userName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.email, Validators.required, Validators.minLength(6)]],
-      phone: ['', [Validators.required, Validators.minLength(6)]],
-      age: ['', [Validators.required, Validators.minLength(2)]],
-      city: ['', [Validators.required, Validators.minLength(3)]],
-      street: ['', [Validators.required, Validators.minLength(3)]],
-    });
-    const userNameControl = this.editForm.get('userName');
-    userNameControl.valueChanges.debounceTime(1000)
-      .subscribe(
-        value => this.setNameMsg(userNameControl)
-      );
-    const emailControl = this.editForm.get('email');
-    emailControl.valueChanges.debounceTime(1000).subscribe(
-      value => this.setEmailMsg(emailControl)
-    );
-    const phoneControl = this.editForm.get('phone');
-    phoneControl.valueChanges.debounceTime(1000)
-      .subscribe(
-        value => this.setPhoneMsg(phoneControl)
-      );
-    const ageControl = this.editForm.get('age');
-    ageControl.valueChanges.debounceTime(1000)
-      .subscribe(
-        value => this.setAgeMsg(ageControl)
-      );
-    const cityControl = this.editForm.get('city');
-    cityControl.valueChanges.debounceTime(1000)
-      .subscribe(
-        value => this.setCityMsg(cityControl)
-      );
-    const streetControl = this.editForm.get('street');
-    streetControl.valueChanges.debounceTime(1000)
-      .subscribe(
-        value => this.setStreetMsg(streetControl)
-      );
-    // this.populateData();
+
   }
 
   getUser() {
@@ -111,107 +68,15 @@ export class MembersComponent implements OnInit{
     );
   }
 
-/*  populateData(){
-    this.editForm.setValue({
-      userName: this.currentUser.userName,
-      email: this.currentUser.email,
-      phone: this.currentUser.phone,
-      age: this.currentUser.age,
-      city: this.currentUser.city,
-      street: this.currentUser.street
-    });
-  }*/
-
-  setNameMsg(c: AbstractControl): void {
-    this.nameMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.nameMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  setEmailMsg(c: AbstractControl): void {
-    this.emailMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.emailMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  setPhoneMsg(c: AbstractControl): void {
-    this.phoneMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.phoneMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  setAgeMsg(c: AbstractControl): void {
-    this.ageMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.ageMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  setCityMsg(c: AbstractControl): void {
-    this.cityMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.cityMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  setStreetMsg(c: AbstractControl): void {
-    this.streetMessage = '';
-    if ((c.touched || c.dirty) && c.errors) {
-      this.streetMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[key])
-        .join(' ');
-      console.log(Object.keys(c.errors));
-    }
-  }
-
-  /*  onSubmit(formData) {
-   if (formData.valid) {
-   this._authServ.(formData.value.email, formData.value.password)
-
-   }
-   }*/
-
-  onSubmit(formData): void {
+  onSubmit(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
 
     const path = `users/${this._authServ.currentUserId}`; // Endpoint on firebase
-    const data = {
-      userName: formData.value.userName,
-      email: formData.value.email,
-      phone: formData.value.phone,
-      age: formData.value.age,
-      city: formData.value.city,
-      street: formData.value.street
-    };
-    if (formData.valid) {
-      // console.log(formData.formControlName('userName').viewModel)
-      this._db.object(path).update(data)
+      this._db.object(path).update(this.currentUser)
         .catch(error => console.log(error));
-
-    }
     this.getUser();
     this.editing = false;
   }
-/*  ngAfterViewChecked(): void {
-    this.populateData();
-  }*/
+
 }

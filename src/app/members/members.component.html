@@ -12,59 +12,148 @@
   </div>
 
   <div class="small-12 medium-3 columns">
-    <div *ngIf="editing" class="card edit">
+    <!--<div *ngIf="editing" class="card edit">-->
+    <div [class.out]="!editing" class="card edit">
       <h4>Персональные данные</h4>
       <span>Обязательно заполните все поля.</span>
       <hr>
-      <form #formData='ngForm' novalidate
-            (ngSubmit)="onSubmit(formData)"
-            [formGroup]="editForm">
+      <form (ngSubmit)="onSubmit()" #editForm="ngForm">
         <div>
-          <span class="error" *ngIf="nameMessage">{{ nameMessage }}</span>
-          <input [ngClass]="{'has-error': nameMessage}" class="form-control"
-                 type="text"
-                 placeholder="Имя и Фамилия"
-                 formControlName="userName">
+          <label>Имя и Фамилия
+            <span *ngIf="(uName.touched || uName.dirty) && uName.errors">
+                            <span class="has-error" *ngIf="uName.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uName.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uName.touched || uName.dirty) && uName.errors}" class="form-control"
+                   type="text"
+                   [(ngModel)]="currentUser.userName"
+                   value="{{currentUser.userName}}"
+                   name="userName"
+                   #uName="ngModel"
+                   required
+                   minlength="3">
+
+          </label>
         </div>
         <!--email-->
-        <div >
-          <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
-          <input [ngClass]="{'has-error': emailMessage}" class="form-control"
-                 id="emailId"
-                 type="email"
-                 placeholder="Почта"
-                 formControlName="email">
+        <div>
+          <label>Почта
+            <span *ngIf="(uEmail.touched || uEmail.dirty) && uEmail.errors">
+                            <span class="has-error" *ngIf="uEmail.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uEmail.errors.minlength">
+                                Введено мало символов.
+                            </span>
+                <span  class="has-error" *ngIf="uEmail.errors.email">
+                                Ввeдите правильную почту.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uEmail.touched || uEmail.dirty) && uEmail.errors}" class="form-control"
+                   id="emailId"
+                   type="email"
+                   [(ngModel)]="currentUser.email"
+                   value="{{currentUser.email}}"
+                   name="email"
+                   #uEmail="ngModel"
+                   required
+                   minlength="3"
+                   email
+            >
+
+          </label>
         </div>
         <div>
-          <span class="error" *ngIf="phoneMessage">{{ phoneMessage }}</span>
-          <input [ngClass]="{'has-error': phoneMessage}" class="form-control"
-                 type="number"
-                 placeholder="Телефон"
-                 formControlName="phone">
+          <label>Телефон
+            <span *ngIf="(uPhone.touched || uPhone.dirty) && uPhone.errors">
+                            <span class="has-error" *ngIf="uPhone.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uPhone.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uPhone.touched || uPhone.dirty) && uPhone.errors}" class="form-control"
+                   type="number"
+                   [(ngModel)]="currentUser.phone"
+                   value="{{currentUser.phone}}"
+                   name="phone"
+                   #uPhone="ngModel"
+                   required
+                   minlength="3"  >
+
+          </label>
         </div>
         <div>
-          <span class="error" *ngIf="ageMessage">{{ ageMessage }}</span>
-          <input [ngClass]="{'has-error': ageMessage}" class="form-control"
-                 type="number"
-                 placeholder="Возраст"
-                 formControlName="age">
+          <label>Возраст
+            <span *ngIf="(uAge.touched || uAge.dirty) && uAge.errors">
+                            <span class="has-error" *ngIf="uAge.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uAge.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uAge.touched || uAge.dirty) && uAge.errors}" class="form-control"
+                   type="number"
+                   [(ngModel)]="currentUser.age"
+                   value="{{currentUser.age}}"
+                   name="age"
+                   #uAge="ngModel"
+                   required
+                   minlength="3">
+
+          </label>
         </div>
         <span>Поля ниже заполните на АНГЛИЙСКОМ языке.</span>
         <div>
-          <span class="error" *ngIf="cityMessage">{{ cityMessage }}</span>
-          <input [ngClass]="{'has-error': cityMessage}" class="form-control"
-                 type="text"
-                 placeholder="City"
-                 formControlName="city">
+          <label>City
+            <span *ngIf="(uCity.touched || uCity.dirty) && uCity.errors">
+                            <span class="has-error" *ngIf="uCity.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uCity.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uCity.touched || uCity.dirty) && uCity.errors}" class="form-control"
+                   type="text"
+                   [(ngModel)]="currentUser.city"
+                   value="{{currentUser.city}}"
+                   name="city"
+                   #uCity="ngModel"
+                   required
+                   minlength="3">
+
+
+          </label>
         </div>
         <div>
-          <span class="error" *ngIf="streetMessage">{{ streetMessage }}</span>
-          <input [ngClass]="{'has-error': streetMessage}" class="form-control"
-                 type="text"
-                 placeholder="Street, House Number"
-                 formControlName="street">
+          <label>Street, House number
+            <span *ngIf="(uStreet.touched || uStreet.dirty) && uStreet.errors">
+                            <span class="has-error" *ngIf="uStreet.errors.required">
+                                Это поле обязательно.
+                            </span>
+                            <span  class="has-error" *ngIf="uStreet.errors.minlength">
+                                Введено мало символов.
+                            </span>
+            </span>
+            <input [ngClass]="{'has-error': (uStreet.touched || uStreet.dirty) && uStreet.errors}"  class="form-control"
+                   type="text"
+                   [(ngModel)]="currentUser.street"
+                   value="{{currentUser.street}}"
+                   name="street"
+                   #uStreet="ngModel"
+                   required
+                   minlength="3">
+
+          </label>
         </div>
-        <button type="submit" class="button expanded" [disabled]="!editForm.valid && editForm.touched" >
+        <button type="submit" class="button expanded" [disabled]="!editForm.valid">
           Отправить
         </button>
       </form>
@@ -72,14 +161,14 @@
     <div *ngIf="!editing" class="card">
       <h4>Персональные данные</h4>
       <hr>
-      <p>Имя: {{ currentUser.userName }}</p>
+      <p>Имя: {{currentUser.userName}}</p>
       <p>Почта: {{ currentUser.email }}</p>
       <p>Телефон: {{ currentUser.phone }}</p>
       <p>Возраст: {{ currentUser.age }}</p>
       <p>Город: {{ currentUser.city }}</p>
       <p>Улица: {{currentUser.street}}</p>
       <hr>
-      <input  type="button" class="button" value="Редактировать" (click)="editing = true">
+      <input type="button" class="button" value="Редактировать" (click)="editing = true">
     </div>
 
   </div>
