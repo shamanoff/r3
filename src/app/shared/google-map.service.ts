@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/Rx';
-import { MapsAPILoader} from 'angular2-google-maps/core';
 
 @Injectable()
 export class GoogleMapService {
-
+  coordinates: Object = {
+    lat: '',
+    lng: ''
+  };
 
   constructor(private _http: Http) {
   }
@@ -15,10 +17,12 @@ export class GoogleMapService {
       .map(
         (response: Response) => {
           const data = response.json();
+          this.coordinates = data;
+          console.log('COOR '+ JSON.stringify(this.coordinates));
           return data;
         }
-      );
 
+  );
   }
 
 

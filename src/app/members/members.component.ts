@@ -99,28 +99,27 @@ export class MembersComponent implements OnInit, AfterViewInit {
       .subscribe(
         (data: any) => {
           this.coordinates = _.get(data, ['results', '0', 'geometry', 'location']);
+
+        /*  this.currentUser.lat = (''+ _.get(data, ['results', '0', 'geometry', 'location', 'lat']));
+          this.currentUser.lng = (''+ _.get(data, ['results', '0', 'geometry', 'location', 'lng']));*/
         },
         (error) => console.log(error)
       );
   }
+/*  setCoordinates(){
+    this.currentUser.lat = _.get(this._mapServ, 'lat');
+    this.currentUser.lng = _.get(this._mapServ, 'lng');
+  }*/
 
   onSubmit(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-
+    this.getCoordinates();
     const path = `users/${this._authServ.currentUserId}`; // Endpoint on firebase
     this._db.object(path).update(this.currentUser)
       .catch(error => console.log(error));
     this.getUser();
     this.editing = false;
-    this.getCoordinates();
-    this.setCoordinatesToFire();
   }
 
-  setCoordinatesToFire(){
-    const lat = _.get(this.coordinates, 'lat');
-    const lng = _.get(this.coordinates, 'lng');
-
-    console.log(this.coordinates)
-  }
 }
