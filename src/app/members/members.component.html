@@ -20,7 +20,7 @@
       <hr>
       <form (ngSubmit)="onSubmit()" #editForm="ngForm">
         <div>
-          <label>Фото профиля
+          <label>Фото профиля(ссылка)
             <span *ngIf="(uPic.touched || uPic.dirty) && uPic.errors">
                             <span class="has-error" *ngIf="uPic.errors.required">
                                 Это поле обязательно.
@@ -107,7 +107,7 @@
                    name="phone"
                    #uPhone="ngModel"
                    required
-                   minlength="3"  >
+                   minlength="9"  >
 
           </label>
         </div>
@@ -198,10 +198,10 @@
       <hr>
       <div >
         <h4>Координаты</h4>
-        <p>Latitude: {{coordinates.lat}} | Longitude: {{coordinates.lng}}</p>
+        <p>Latitude: {{currentUser.lat}} | Longitude: {{currentUser.lng}}</p>
         <hr>
-        <sebm-google-map class="map" [latitude]="coordinates.lat" [longitude]="coordinates.lng" [zoom]="18">
-          <sebm-google-map-marker [latitude]="coordinates.lat" [longitude]="coordinates.lng">
+        <sebm-google-map class="map" [latitude]="currentUser.lat" [longitude]="currentUser.lng" [zoom]="18">
+          <sebm-google-map-marker [latitude]="currentUser.lat" [longitude]="currentUser.lng">
           </sebm-google-map-marker>
         </sebm-google-map>
       </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/auth.service';
 import {Router} from '@angular/router';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
@@ -6,10 +6,11 @@ import {User} from '../shared/user';
 import {Observable} from 'rxjs/Observable';
 import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {GoogleMapService} from '../shared/google-map.service';
 import * as _ from 'lodash';
-
+import {Http, Response} from '@angular/http';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-members',
@@ -19,8 +20,9 @@ import * as _ from 'lodash';
 export class MembersComponent implements OnInit, AfterViewInit {
 
   coordinates: Object = {
-    lat: '31.046051',
-    lng: '34.851612'
+    lat: '',
+    lng: ''
+
   };
 
   // form
@@ -48,6 +50,7 @@ export class MembersComponent implements OnInit, AfterViewInit {
     street: '',
     lat: '',
     lng: ''
+
   };
 
   editing = false;
@@ -62,13 +65,14 @@ export class MembersComponent implements OnInit, AfterViewInit {
               private router: Router,
               private _db: AngularFireDatabase,
               private _fb: FormBuilder,
-              private _mapServ: GoogleMapService) {
+              private _mapServ: GoogleMapService,
+              private _http: Http) {
   }
 
   ngOnInit() {
     this.userId = this._authServ.currentUserId;
     // this.setCurrentPosition();
-    this.getCoordinates();
+    // this.getCoordinates();
 
 
   }
@@ -84,15 +88,15 @@ export class MembersComponent implements OnInit, AfterViewInit {
     );
   }
 
-/*  setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
+  /*  setCurrentPosition() {
+   if ('geolocation' in navigator) {
+   navigator.geolocation.getCurrentPosition((position) => {
+   this.latitude = position.coords.latitude;
+   this.longitude = position.coords.longitude;
 
-      });
-    }
-  }*/
+   });
+   }
+   }*/
 
   getCoordinates() {
     this._mapServ.getInfo(this.currentUser.city, this.currentUser.street)
@@ -100,16 +104,13 @@ export class MembersComponent implements OnInit, AfterViewInit {
         (data: any) => {
           this.coordinates = _.get(data, ['results', '0', 'geometry', 'location']);
 
-        /*  this.currentUser.lat = (''+ _.get(data, ['results', '0', 'geometry', 'location', 'lat']));
-          this.currentUser.lng = (''+ _.get(data, ['results', '0', 'geometry', 'location', 'lng']));*/
+          /*     this.currentUser.lat = ('' + _.get(data, ['results', '0', 'geometry', 'location', 'lat']));
+           this.currentUser.lng = ('' + _.get(data, ['results', '0', 'geometry', 'location', 'lng']));*/
         },
         (error) => console.log(error)
       );
   }
-/*  setCoordinates(){
-    this.currentUser.lat = _.get(this._mapServ, 'lat');
-    this.currentUser.lng = _.get(this._mapServ, 'lng');
-  }*/
+
 
   onSubmit(): void {
     // Writes user name and email to realtime db
@@ -120,6 +121,6 @@ export class MembersComponent implements OnInit, AfterViewInit {
       .catch(error => console.log(error));
     this.getUser();
     this.editing = false;
-  }
+  };
 
 }
