@@ -1,7 +1,8 @@
 import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {User} from "./user";
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,7 @@ export class AuthService {
     this.afAuth.authState.subscribe((auth) => {
       this._authState = auth;
     });
+
   }
 
   //// Email/Password Auth ////

@@ -1,0 +1,23 @@
+
+<!--<sebm-google-map class="map" [latitude]="coordinates.lat" [longitude]="coordinates.lng" [zoom]="10">
+  <sebm-google-map-marker
+    *ngFor="let m of markers;let i = index"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+  >
+
+&lt;!&ndash;    <sebm-google-map-info-window>
+      <strong>{{m.userName}}</strong>
+      <br>
+    </sebm-google-map-info-window>&ndash;&gt;
+  </sebm-google-map-marker>
+</sebm-google-map>-->
+<div class="row">
+  <div class="small-12 columns">
+    <div *ngFor="let i of markers; ">
+      <h5>{{(i.userName | async) | json}}</h5>
+
+    </div>
+
+  </div>
+</div>

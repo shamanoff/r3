@@ -8,6 +8,7 @@ import {MembersComponent} from './members/members.component';
 import {SignupComponent} from './signup/signup.component';
 import {AuthGuard} from './shared/guard.service';
 import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
 // import { EmailComponent } from './email/email.component';
 
 export const router: Routes = [
@@ -15,6 +16,7 @@ export const router: Routes = [
   {path: 'home', redirectTo: ''},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
+  {path: 'about', component: AboutComponent},
   // { path: 'login-email', component: EmailComponent },
   // { path: 'members', component: MembersComponent }
   {path: 'members', component: MembersComponent, canActivate: [AuthGuard]}

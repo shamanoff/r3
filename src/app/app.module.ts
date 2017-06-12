@@ -28,7 +28,9 @@ import { NewsruComponent } from './newsru/newsru.component';
 import { FooterComponent } from './footer/footer.component';
 import { CursorComponent } from './israelinfo/israelinfo.component';
 import { SamoComponent } from './samo/samo.component';
-import {GoogleMapService} from "./shared/google-map.service";
+import {GoogleMapService} from './shared/google-map.service';
+import { MapComponent } from './map/map.component';
+import { AboutComponent } from './about/about.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -56,6 +58,8 @@ export const firebaseConfig = {
     FooterComponent,
     CursorComponent,
     SamoComponent,
+    MapComponent,
+    AboutComponent,
 
   ],
   imports: [
@@ -69,7 +73,7 @@ export const firebaseConfig = {
     routes,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyATbHLEJIxXo3yLBciyu5I8mFKIo6Ewjgw',
-      libraries: ["places"]
+      libraries: ['places']
     }),
 
   ],
