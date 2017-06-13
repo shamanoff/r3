@@ -12,7 +12,7 @@ export class CursorComponent implements OnInit {
   @Input() feed: any;
 
 
-  private feedUrl: string = 'http%3A%2F%2Fisraelinfo.co.il%2Fxml%2Fnews.xml&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=14';
+  private feedUrl: string = 'http%3A%2F%2Fisraelinfo.co.il%2Fxml%2Fnews.xml&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=13';
   feeds: Array<FeedEntry> = [];
   constructor(private _feedService: FeedService) { }
 

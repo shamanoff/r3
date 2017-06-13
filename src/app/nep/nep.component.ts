@@ -12,7 +12,7 @@ export class NepComponent implements OnInit {
   @Input() feed: any;
 
 
-  private feedUrl: string = 'https%3A%2F%2Fnepmag.com%2Ffeed%2F&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=18';
+  private feedUrl: string = 'https%3A%2F%2Fnepmag.com%2Ffeed%2F&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=16';
   feeds: Array<FeedEntry> = [];
   constructor(private _feedService: FeedService) { }
 

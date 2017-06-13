@@ -63,7 +63,7 @@
           </label>
         </div>
         <!--email-->
-        <!--<div>
+        <div>
           <label>Почта
             <span *ngIf="(uEmail.touched || uEmail.dirty) && uEmail.errors">
                             <span class="has-error" *ngIf="uEmail.errors.required">
@@ -90,9 +90,9 @@
             >
 
           </label>
-        </div>-->
+        </div>
 
-        <p>Почта: {{currentUser.email}}</p>
+
 
 
         <div>
@@ -112,7 +112,7 @@
                    name="phone"
                    #uPhone="ngModel"
                    required
-                   minlength="3"
+                   minlength="8"
                    >
 
           </label>
@@ -136,7 +136,8 @@
                    value="{{currentUser.age}}"
                    name="age"
                    #uAge="ngModel"
-                   minlength="3"
+                   minlength="1"
+                   maxlength="2"
                    required>
 
           </label>

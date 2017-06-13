@@ -12,7 +12,7 @@ export class MigComponent implements OnInit {
   @Input() feed: any;
 
 
-  private feedUrl: string = 'http%3A%2F%2Fmignews.com%2Fexport%2Fmig_export2.html';
+  private feedUrl: string = 'http%3A%2F%2Fmignews.com%2Fexport%2Fmig_export3.html&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=15';
   feeds: Array<FeedEntry> = [];
   constructor(private _feedService: FeedService) { }
 
