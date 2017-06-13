@@ -4,8 +4,7 @@ import 'rxjs/Rx';
 import {AuthService} from "./auth.service";
 import {AngularFireDatabase} from "angularfire2/database";
 import * as _ from 'lodash';
-import {Marker} from "../map/marker";
-import {Observable} from "rxjs/Observable";
+
 
 @Injectable()
 export class GoogleMapService {
@@ -14,7 +13,7 @@ export class GoogleMapService {
     lat: '',
     lng: ''
   };
-  marker$: Observable<Marker>;
+  // marker$: Observable<Marker>;
 
   constructor(private _http: Http, private _authServ: AuthService, private _db: AngularFireDatabase,) {
   }

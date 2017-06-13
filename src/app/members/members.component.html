@@ -18,14 +18,14 @@
       <h4>Персональные данные</h4>
       <span>Обязательно заполните все поля.</span>
       <hr>
-      <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #editForm="ngForm" >
         <div>
           <label>Фото профиля(ссылка)
             <span *ngIf="(uPic.touched || uPic.dirty) && uPic.errors">
                             <span class="has-error" *ngIf="uPic.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uPic.errors.minlength">
+                            <span class="has-error" *ngIf="uPic.errors.minlength">
                                 Введено мало символов.
                             </span>
             </span>
@@ -47,7 +47,7 @@
                             <span class="has-error" *ngIf="uName.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uName.errors.minlength">
+                            <span class="has-error" *ngIf="uName.errors.minlength">
                                 Введено мало символов.
                             </span>
             </span>
@@ -63,7 +63,7 @@
           </label>
         </div>
         <!--email-->
-        <div>
+        <!--<div>
           <label>Почта
             <span *ngIf="(uEmail.touched || uEmail.dirty) && uEmail.errors">
                             <span class="has-error" *ngIf="uEmail.errors.required">
@@ -90,14 +90,18 @@
             >
 
           </label>
-        </div>
+        </div>-->
+
+        <p>Почта: {{currentUser.email}}</p>
+
+
         <div>
           <label>Телефон
             <span *ngIf="(uPhone.touched || uPhone.dirty) && uPhone.errors">
                             <span class="has-error" *ngIf="uPhone.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uPhone.errors.minlength">
+                            <span class="has-error" *ngIf="uPhone.errors.minLength">
                                 Введено мало символов.
                             </span>
             </span>
@@ -108,7 +112,8 @@
                    name="phone"
                    #uPhone="ngModel"
                    required
-                   minlength="9"  >
+                   minlength="3"
+                   >
 
           </label>
         </div>
@@ -118,8 +123,11 @@
                             <span class="has-error" *ngIf="uAge.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uAge.errors.minlength">
+                            <span class="has-error" *ngIf="uAge.errors.minLength">
                                 Введено мало символов.
+                            </span>
+               <span class="has-error" *ngIf="uAge.errors.maxLength">
+                                Введено много символов.
                             </span>
             </span>
             <input [ngClass]="{'has-error': (uAge.touched || uAge.dirty) && uAge.errors}" class="form-control"
@@ -128,8 +136,8 @@
                    value="{{currentUser.age}}"
                    name="age"
                    #uAge="ngModel"
-                   required
-                   minlength="3">
+                   minlength="3"
+                   required>
 
           </label>
         </div>
@@ -140,7 +148,7 @@
                             <span class="has-error" *ngIf="uCity.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uCity.errors.minlength">
+                            <span class="has-error" *ngIf="uCity.errors.minlength">
                                 Введено мало символов.
                             </span>
             </span>
@@ -162,11 +170,11 @@
                             <span class="has-error" *ngIf="uStreet.errors.required">
                                 Это поле обязательно.
                             </span>
-                            <span  class="has-error" *ngIf="uStreet.errors.minlength">
+                            <span class="has-error" *ngIf="uStreet.errors.minlength">
                                 Введено мало символов.
                             </span>
             </span>
-            <input [ngClass]="{'has-error': (uStreet.touched || uStreet.dirty) && uStreet.errors}"  class="form-control"
+            <input [ngClass]="{'has-error': (uStreet.touched || uStreet.dirty) && uStreet.errors}" class="form-control"
                    type="text"
                    [(ngModel)]="currentUser.street"
                    value="{{currentUser.street}}"
@@ -197,7 +205,7 @@
       <hr>
       <input type="button" class="button" value="Редактировать" (click)="editing = true">
       <hr>
-      <div >
+      <div>
         <h4>Координаты</h4>
         <p>Latitude: {{currentUser.lat}} | Longitude: {{currentUser.lng}}</p>
         <hr>
@@ -207,7 +215,6 @@
         </sebm-google-map>
       </div>
     </div>
-
 
 
   </div>

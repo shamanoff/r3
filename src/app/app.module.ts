@@ -77,7 +77,7 @@ export const firebaseConfig = {
     }),
 
   ],
-  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService],
+  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService, FormsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

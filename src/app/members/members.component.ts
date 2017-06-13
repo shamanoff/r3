@@ -66,7 +66,8 @@ export class MembersComponent implements OnInit, AfterViewInit {
               private _db: AngularFireDatabase,
               private _fb: FormBuilder,
               private _mapServ: GoogleMapService,
-              private _http: Http) {
+              private _http: Http
+  ) {
   }
 
   ngOnInit() {
@@ -121,6 +122,8 @@ export class MembersComponent implements OnInit, AfterViewInit {
       .catch(error => console.log(error));
     this.getUser();
     this.editing = false;
+ /*   const user = this._af.auth.currentUser;
+    user.updateEmail(this.currentUser.email);*/
   };
 
 }

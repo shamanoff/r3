@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
@@ -7,43 +7,52 @@ import {User} from "./user";
 @Injectable()
 export class AuthService {
   loginError: string;
-
+  user$: FirebaseListObservable<User[]>;
   private _authState: any = '';
 
   set authState(value: any) {
     this._authState = value;
   }
 
-  constructor(private afAuth: AngularFireAuth,
-              private db: AngularFireDatabase,
-              private router: Router) {
+  constructor(private _afAuth: AngularFireAuth,
+              private _db: AngularFireDatabase,
+              private _router: Router) {
 
-    this.afAuth.authState.subscribe((auth) => {
+    this._afAuth.authState.subscribe((auth) => {
       this._authState = auth;
     });
 
   }
 
+  //// Get Users ////
+
+  getUsers() {
+    this.user$ = this._db.list('/users') as
+      FirebaseListObservable<User[]>;
+      return this.user$;
+  }
+
   //// Email/Password Auth ////
 
   emailSignUp(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    return this._afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this._authState = user;
         this.updateUserData();
       })
       // .catch(error => console.log('signup - ' + error.message));
-  .catch(error => console.log(error));
+      .catch(error => console.log(error));
 
   }
 
   emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    return this._afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this._authState = user;
         this.updateUserData();
+
       })
-    .catch(error => console.log(error));
+      .catch(error => console.log(error));
     // .catch(error => this.loginError = error.message);
 
   }
@@ -51,7 +60,7 @@ export class AuthService {
 
   // Sends email allowing user to reset password
   resetPassword(email: string) {
-    const auth = this.afAuth.auth;
+    const auth = this._afAuth.auth;
 
     return auth.sendPasswordResetEmail(email)
       .then(() => console.log('email sent'))
@@ -62,10 +71,9 @@ export class AuthService {
   //// Sign Out ////
 
   signOut(): void {
-    this.afAuth.auth.signOut();
-    this.router.navigate(['/']);
+    this._afAuth.auth.signOut();
+    this._router.navigate(['/']);
   }
-
 
 
   // Returns true if user is logged in
@@ -80,7 +88,7 @@ export class AuthService {
 
   // Returns
   get currentUserObservable(): any {
-    return this.afAuth.authState;
+    return this._afAuth.authState;
   }
 
   // Returns current user UID
@@ -95,16 +103,22 @@ export class AuthService {
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this._authState) { return 'Guest'; }
-    else if (this.currentUserAnonymous) { return 'Anonymous'; }
-    else { return this._authState['displayName'] || 'User without a Name'; }
+    if (!this._authState) {
+      return 'Guest';
+    }
+    else if (this.currentUserAnonymous) {
+      return 'Anonymous';
+    }
+    else {
+      return this._authState['displayName'] || 'User without a Name';
+    }
   }
 
 
   //// Helpers ////
 
   private updateUserData(): void {
-    // Writes user name and email to realtime db
+    // Writes user name and email to realtime _db
     // useful if your app displays information about users or for admin features
 
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
@@ -113,7 +127,7 @@ export class AuthService {
       name: this._authState.displayName
     };
 
-    this.db.object(path).update(data)
+    this._db.object(path).update(data)
       .catch(error => console.log(error));
 
   }

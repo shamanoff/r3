@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
     lng: 34.781768
   };
   user$: FirebaseListObservable<any[]>;
-  markers = [];
+  users: User[];
   // marker$: Observable<Marker[]>;
 
 
@@ -28,11 +28,17 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user$ = this._db.list('users');
+    this._authServ.getUsers().subscribe(
+      u => {
+        this.users = u
+      }
+    );
+    console.log(JSON.stringify(this.users) + 'ARRAY')
+/*    this.user$ = this._db.list('users');
     this.user$.subscribe(
       user => this.markers.push(user)
     );
-    console.log(this.markers);
+    console.log(this.markers);*/
 
     /*    this._authServ.user$.map(
           user => this.markers = user

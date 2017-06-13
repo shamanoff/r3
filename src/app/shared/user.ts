@@ -6,6 +6,8 @@ export class User {
               public age: string,
               public city: string,
               public street: string,
+              public lat: string,
+              public lng: string,
 
   ) {
   }
