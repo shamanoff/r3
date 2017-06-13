@@ -31,6 +31,7 @@ import { SamoComponent } from './samo/samo.component';
 import {GoogleMapService} from './shared/google-map.service';
 import { MapComponent } from './map/map.component';
 import { AboutComponent } from './about/about.component';
+import { CounterComponent } from './counter/counter.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -60,6 +61,7 @@ export const firebaseConfig = {
     SamoComponent,
     MapComponent,
     AboutComponent,
+    CounterComponent,
 
   ],
   imports: [
