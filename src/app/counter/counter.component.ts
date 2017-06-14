@@ -11,6 +11,7 @@ import {FirebaseObjectObservable} from "angularfire2/database";
 export class CounterComponent implements OnInit {
 
   currentUsersCounter: FirebaseObjectObservable<any>;
+
   private today;
   constructor(@Attribute('format') private format, private _cServ: CountService, ) {
     this.format = format;
@@ -24,9 +25,11 @@ export class CounterComponent implements OnInit {
     // console.log(this._authServ.user$);
 
    this._cServ.getUsersCount().subscribe(
-     counter => this.currentUsersCounter = counter
-   );
-   console.log(this.currentUsersCounter + ' Count')
+     // counter => this.currentUsersCounter = counter
+     counter =>this.currentUsersCounter = counter
+
+         );
+
 
   }
 
