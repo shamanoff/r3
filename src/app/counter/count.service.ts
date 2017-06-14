@@ -13,7 +13,7 @@ export class CountService {
 
 
   //// Helpers Counters ////
-/*  updateUsersCounter() {
+  updateUsersCounter() {
     const path = `usersCounter/`; // Endpoint on firebase
     const data = {
      usersCouner: 1
@@ -21,11 +21,11 @@ export class CountService {
 
     this._db.object(path).update(data)
       .catch(error => console.log(error));
-  }*/
+  }
 
   getUsersCount() {
-    this.count$ = this._db.object('/counters');
-    // console.log(this.count$ + 'COUNTS');
+    this.count$ = this._db.object('/counters/1/usersCounter');
+    console.log(this.count$ + 'COUNTS');
     return this.count$;
   }
 
