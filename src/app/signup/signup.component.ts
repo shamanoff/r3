@@ -39,7 +39,6 @@ export class SignupComponent implements OnInit {
           this.error = err;
         } );
     }
-    this._authServ.updateCouner();
   }
 
 /*  onSubmit(formData) {

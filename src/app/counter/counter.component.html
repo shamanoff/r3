@@ -1,5 +1,5 @@
 <div class="row expanded timer text-center">
   <div class="small-12 columns " >
-    <span >На сегодня: {{ today | date:'d MMM y | H:mm:ss' }}, уже зарегестрированно <strong>{{count}}</strong> участников.  </span>
+    <span >На сегодня: {{ today | date:'d MMM y | H:mm:ss' }}, уже зарегестрированно <strong>{{(currentUsersCounter | async)?.usersCounter}}</strong> участников.  </span>
   </div>
 </div>

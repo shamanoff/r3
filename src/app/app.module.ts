@@ -21,7 +21,6 @@ import { HomeComponent } from './home/home.component';
 import {FeedService} from './feeds/feed.service';
 import { MigComponent } from './mig/mig.component';
 import { MeduzaComponent } from './meduza/meduza.component';
-import { FixedPipe } from './shared/fixed.pipe';
 import { NepComponent } from './nep/nep.component';
 import { MarkerComponent } from './marker/marker.component';
 import { NewsruComponent } from './newsru/newsru.component';
@@ -32,6 +31,7 @@ import {GoogleMapService} from './shared/google-map.service';
 import { MapComponent } from './map/map.component';
 import { AboutComponent } from './about/about.component';
 import { CounterComponent } from './counter/counter.component';
+import {CountService} from "./counter/count.service";
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -52,7 +52,6 @@ export const firebaseConfig = {
     HomeComponent,
     MigComponent,
     MeduzaComponent,
-    FixedPipe,
     NepComponent,
     MarkerComponent,
     NewsruComponent,
@@ -79,7 +78,7 @@ export const firebaseConfig = {
     }),
 
   ],
-  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService, FormsModule],
+  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService, FormsModule, CountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,14 +3,15 @@ import {Router} from '@angular/router';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {User} from "./user";
-import {Observable} from "rxjs/Observable";
+
 
 @Injectable()
 export class AuthService {
   loginError: string;
   user$: FirebaseListObservable<User[]>;
+
   private _authState: any = '';
-  usersCounter = 5;
+  // usersCounter = 5;
   set authState(value: any) {
     this._authState = value;
   }
@@ -25,12 +26,6 @@ export class AuthService {
 
   }
 
-  updateCouner() {
-    this.usersCounter += 1 ;
-  }
-  getCount() {
-    return this.usersCounter;
-  }
 
   //// Get Users ////
 
@@ -139,5 +134,6 @@ export class AuthService {
       .catch(error => console.log(error));
 
   }
+
 
 }

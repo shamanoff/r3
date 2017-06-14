@@ -1,7 +1,7 @@
 import {Attribute, Component, OnInit} from '@angular/core';
-import {AuthService} from "../shared/auth.service";
-import {User} from "../shared/user";
-import {Observable} from "rxjs/Observable";
+
+import {CountService} from "./count.service";
+import {FirebaseObjectObservable} from "angularfire2/database";
 
 @Component({
   selector: 'app-counter',
@@ -9,10 +9,10 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./counter.component.scss']
 })
 export class CounterComponent implements OnInit {
-  count;
+
+  currentUsersCounter: FirebaseObjectObservable<any>;
   private today;
-  users: User[];
-  constructor(@Attribute('format') private format, private _authServ: AuthService) {
+  constructor(@Attribute('format') private format, private _cServ: CountService, ) {
     this.format = format;
     this.today =  new Date();
     setInterval(() => {
@@ -22,12 +22,11 @@ export class CounterComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this._authServ.user$);
-    this._authServ.getUsers().subscribe(
-      u => {
-        this.users = u;
-      }
-    );
-    this.count = this._authServ.getCount();
+
+   this._cServ.getUsersCount().subscribe(
+     counter => this.currentUsersCounter = counter
+   );
+   console.log(this.currentUsersCounter + ' Count')
 
   }
 
