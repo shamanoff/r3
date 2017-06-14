@@ -3,6 +3,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
 import {AuthService} from '../shared/auth.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CountService} from "../counter/count.service";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class SignupComponent implements OnInit {
 
   constructor(public _af: AngularFireAuth,
               public router: Router, private _authServ: AuthService,
-              private _fb: FormBuilder) { }
+              private _fb: FormBuilder,
+  private _cServ: CountService) { }
 
   onSubmit(formData) {
     if (formData.valid) {
@@ -39,6 +41,7 @@ export class SignupComponent implements OnInit {
           this.error = err;
         } );
     }
+    this._cServ.updateUsersCounter();
   }
 
 /*  onSubmit(formData) {

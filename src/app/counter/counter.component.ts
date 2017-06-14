@@ -26,7 +26,7 @@ export class CounterComponent implements OnInit {
 
    this._cServ.getUsersCount().subscribe(
      // counter => this.currentUsersCounter = counter
-     counter =>this.currentUsersCounter = counter
+     snapshot  => {this.currentUsersCounter = snapshot.val(); }
 
          );
 
