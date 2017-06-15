@@ -10,10 +10,11 @@ import {FirebaseObjectObservable} from "angularfire2/database";
 })
 export class CounterComponent implements OnInit {
 
-  currentUsersCounter: FirebaseObjectObservable<any>;
+  currentUsersCounter;
 
   private today;
-  constructor(@Attribute('format') private format, private _cServ: CountService, ) {
+  constructor(@Attribute('format') private format,
+              private _cServ: CountService, ) {
     this.format = format;
     this.today =  new Date();
     setInterval(() => {
@@ -26,9 +27,9 @@ export class CounterComponent implements OnInit {
 
    this._cServ.getUsersCount().subscribe(
      // counter => this.currentUsersCounter = counter
-     snapshot  => {this.currentUsersCounter = snapshot.val(); }
+     snapshot  => {this.currentUsersCounter = snapshot.val()}
 
-         );
+         )
 
 
   }
