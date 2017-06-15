@@ -23,13 +23,11 @@ export class CounterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this._authServ.user$);
-
    this._cServ.getUsersCount().subscribe(
-     // counter => this.currentUsersCounter = counter
      snapshot  => {this.currentUsersCounter = snapshot.val()}
 
-         )
+         );
+
 
 
   }

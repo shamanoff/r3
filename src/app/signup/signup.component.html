@@ -17,6 +17,8 @@
                formControlName="email">
         <!--error-->
         <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
+        <span class="error" *ngIf="notFound">{{ emailUserExist }}</span>
+
       </div>
 
       <!--password-->

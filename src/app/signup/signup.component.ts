@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../shared/auth.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CountService} from "../counter/count.service";
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
@@ -14,11 +15,12 @@ import {CountService} from "../counter/count.service";
 export class SignupComponent implements OnInit {
   state = '';
   error: any;
-
   signUpForm: FormGroup;
   emailMessage: string;
   passwordMessage: string;
-
+  fireUserFound = 'The email address is already in use by another account.';
+  notFound = false;
+  emailUserExist = 'Этот адрес уже используется';
   private validationMessages = {
     required: 'This field is required.',
     minlength: 'Must be longer than 6 characters.',
@@ -28,52 +30,29 @@ export class SignupComponent implements OnInit {
   constructor(public _af: AngularFireAuth,
               public router: Router, private _authServ: AuthService,
               private _fb: FormBuilder,
-  private _cServ: CountService) { }
+  private _cServ: CountService,
+  ) { }
 
   onSubmit(formData) {
     if (formData.valid) {
-      this._authServ.emailSignUp(formData.value.email, formData.value.password)
+      this._af.auth.createUserWithEmailAndPassword(formData.value.email,
+        formData.value.password)
         .then(
         res => {
           this.router.navigateByUrl('/members');
-        }).catch(
-        (err) => {
-          this.error = err;
-        } );
+        }).catch(err => {
+          if(err.message.includes(this.fireUserFound)){
+            // console.log('eeeee');
+            console.log(err.message);
+            this.notFound = true;
+          }
+         }
+      );
     }
-    this._cServ.updateUsersCounter();
+
+    if(this.notFound){ this._cServ.updateUsersCounter();}
+
   }
-
-/*  onSubmit(formData) {
-    if (formData.valid) {
-      this._authServ.emailSignUp(formData.value.email, formData.value.password)
-        .then(
-          res => {
-            this.router.navigateByUrl('/members');
-          }).catch(
-        (err) => {
-          this.error = err;
-        } );
-    }
-  }*/
-
-/*  onSubmit(formData) {
-    if (formData.valid) {
-      console.log(formData.value);
-      this._af.auth.createUserWithEmailAndPassword(
-         formData.value.email,
-         formData.value.password,
-
-
-      ).then(
-        (success) => {
-          this.router.navigate(['/members']);
-        }).catch(
-        (err) => {
-          this.error = err;
-        });
-    }
-  }*/
 
   ngOnInit(): void {
     this.signUpForm = this._fb.group({

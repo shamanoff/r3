@@ -9,7 +9,7 @@ import {User} from "./user";
 export class AuthService {
   loginError: string;
   user$: FirebaseListObservable<User[]>;
-
+  error = '';
   private _authState: any = '';
   // usersCounter = 5;
   set authState(value: any) {
@@ -44,7 +44,7 @@ export class AuthService {
         this.updateUserData();
       })
       // .catch(error => console.log('signup - ' + error.message));
-      .catch(error => console.log(error));
+      .catch(error => this.error = error.message);
 
   }
 

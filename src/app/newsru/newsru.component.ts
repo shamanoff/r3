@@ -13,7 +13,7 @@ export class NewsruComponent implements OnInit {
   @Input() feed: any;
 
 
-  private feedUrl: string = 'http%3A%2F%2Ffeeds.newsru.co.il%2Fil%2Fwww%2Fnews%2Fbig&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=14';
+  private feedUrl: string = 'http%3A%2F%2Ffeeds.newsru.co.il%2Fil%2Fwww%2Fnews%2Fmain&api_key=1cqrtfxjfkrgzksbt2burovgxlqd6gyo6qso29ou&count=14';
   feeds: Array<FeedEntry> = [];
   constructor(private _feedService: FeedService) { }
 
