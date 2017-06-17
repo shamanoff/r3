@@ -14,7 +14,7 @@
                  type="email"
                  placeholder="Почта"
                  formControlName="email">
-          <!--error-->
+
           <span class="error" *ngIf="emailMessage">{{ emailMessage }}</span>
           <span class="error" *ngIf="notFound">{{ emailUserNotFound }}</span>
         </div>
@@ -26,7 +26,7 @@
                  type="password"
                  placeholder="Пароль"
                  formControlName="password">
-          <!--error-->
+
           <span class="error" *ngIf="passwordMessage">{{ passwordMessage  }}</span>
           <span class="error" *ngIf="error">{{ error.message }}</span>
           <span class="error" *ngIf="invalid">{{ passwordInvalid }}</span>

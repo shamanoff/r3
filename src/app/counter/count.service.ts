@@ -24,7 +24,7 @@ export class CountService {
 
   updateUsersCounter() {
     this.getUsersCount().subscribe(
-      snapshot  => {this.count = snapshot.val()}
+      snapshot  => {this.count = snapshot.val(); }
     );
     const c = this.count + 1;
     this._db.object('/counters/1').set({

@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
         formData.value.password)
        .then(
          (user) => {
-         this._authServ.authState(user);
+           this._authServ.authState.set(user);
+         // this._authServ.authState(user);
        // this.router.navigateByUrl('/members');
        }).catch(err => {
          if(err.message === this.fireUserNotFound){
@@ -72,16 +73,16 @@ export class LoginComponent implements OnInit {
     if (formData.valid) {
       // response is valid
       this._authServ.emailLogin(formData.value.email, formData.value.password)
-    /!*           .then(
+               .then(
            res => {
            this.router.navigateByUrl('/members');
 
            })
            .catch((err) => {
            console.log(err.message + ' err') ;
-           });*!/
+           });
     }
-    console.log(this._authServ.loginError + ' This error')
+    console.log(this._authServ.loginError + ' This signUpError');
 
   }*/
 

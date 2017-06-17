@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {User} from "./user";
+import {User} from './user';
+import {CountService} from "../counter/count.service";
 
 
 @Injectable()
 export class AuthService {
   loginError: string;
   user$: FirebaseListObservable<User[]>;
+  signUpError = '';
   error = '';
   private _authState: any = '';
   // usersCounter = 5;
@@ -16,9 +18,14 @@ export class AuthService {
     this._authState = value;
   }
 
+  get authState(): any {
+    return this._authState;
+  }
+
   constructor(private _afAuth: AngularFireAuth,
               private _db: AngularFireDatabase,
-              private _router: Router) {
+              private _router: Router,
+  private _cServ: CountService) {
 
     this._afAuth.authState.subscribe((auth) => {
       this._authState = auth;
@@ -42,9 +49,10 @@ export class AuthService {
       .then((user) => {
         this._authState = user;
         this.updateUserData();
+        this._cServ.updateUsersCounter();
       })
-      // .catch(error => console.log('signup - ' + error.message));
-      .catch(error => this.error = error.message);
+      // .catch(err => console.log('signup - ' + err.message));
+      .catch(error => this.signUpError = error.message); // changed
 
   }
 
@@ -56,7 +64,7 @@ export class AuthService {
 
       })
       .catch(error => console.log(error));
-    // .catch(error => this.loginError = error.message);
+    // .catch(signUpError => this.loginError = signUpError.message);
 
   }
 
@@ -134,6 +142,7 @@ export class AuthService {
       .catch(error => console.log(error));
 
   }
+
 
 
 }

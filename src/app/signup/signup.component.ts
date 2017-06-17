@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
 import {AuthService} from '../shared/auth.service';
@@ -30,34 +30,83 @@ export class SignupComponent implements OnInit {
   constructor(public _af: AngularFireAuth,
               public router: Router, private _authServ: AuthService,
               private _fb: FormBuilder,
-  private _cServ: CountService,
-  ) { }
-
+              private _cServ: CountService,) {
+  }
   onSubmit(formData) {
     if (formData.valid) {
-      this._af.auth.createUserWithEmailAndPassword(formData.value.email,
+      this._authServ.emailSignUp(formData.value.email,
         formData.value.password)
         .then(
-        res => {
-          this.router.navigateByUrl('/members');
-        }).catch(err => {
-          if(err.message.includes(this.fireUserFound)){
-            // console.log('eeeee');
-            console.log(err.message);
+          res => {
+            this.router.navigateByUrl('/members');
+          }).catch(err => {
+          if (this._authServ.signUpError.includes(this.fireUserFound)) {
+            console.log(err.message + 'ERR');
             this.notFound = true;
           }
-         }
+        }
       );
     }
-
-    if(this.notFound){ this._cServ.updateUsersCounter();}
+    console.log(' eeeee ' + this._authServ.signUpError);
+    if (this._authServ.signUpError.includes(this.fireUserFound)) {
+      this.notFound = true;
+    }
+ /*   if (!this.notFound) {
+      this._cServ.updateUsersCounter();
+    }*/
 
   }
 
+
+/*  onSubmit(formData) {
+    if (formData.valid) {
+      this._authServ.emailSignUp(formData.value.email,
+        formData.value.password)
+        .then(
+          res => {
+            this.router.navigateByUrl('/members');
+          }).catch(err => {
+          if (this._authServ.signUpError.includes(this.fireUserFound)) {
+            console.log(err.message);
+            this.notFound = true;
+          }
+        }
+      );
+    }
+    console.log(' eeeee ' + this._authServ.signUpError);
+    if (this._authServ.signUpError.includes(this.fireUserFound)) {
+      this.notFound = true;
+    }
+    if (!this.notFound) {
+      this._cServ.updateUsersCounter();
+    }
+
+  }*/
+
+  /*  onSubmit(formData) {
+   if (formData.valid) {
+   this._af.auth.createUserWithEmailAndPassword(formData.value.email,
+   formData.value.password)
+   .then(
+   res => {
+   this.router.navigateByUrl('/members');
+   }).catch(err => {
+   if(err.message.includes(this.fireUserFound)){
+   // console.log('eeeee');
+   console.log(err.message);
+   this.notFound = true;
+   }
+   }
+   );
+   }
+
+   if(this.notFound){ this._cServ.updateUsersCounter();}
+
+   }*/
   ngOnInit(): void {
     this.signUpForm = this._fb.group({
-      email: ['', [Validators.email, Validators.required, Validators.minLength(6) ] ],
-      password: ['', [Validators.required, Validators.minLength(6)] ]
+      email: ['', [Validators.email, Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
     const emailControl = this.signUpForm.get('email');
     emailControl.valueChanges.debounceTime(1000).subscribe(
