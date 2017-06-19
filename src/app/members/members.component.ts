@@ -41,7 +41,7 @@ export class MembersComponent implements OnInit, AfterViewInit {
 
   };
   currentUser = {
-    userPic: 'http://i.imgur.com/cTxSCbr.png',
+    userPic: '',
     userName: '',
     email: '',
     phone: '',

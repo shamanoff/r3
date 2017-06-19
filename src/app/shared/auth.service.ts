@@ -82,7 +82,7 @@ export class AuthService {
         this.updateUserData();
 
       })
-      .catch(error => console.log(error));
+      // .catch(error => console.log(error));
     // .catch(signUpError => this.loginError = signUpError.message);
 
   }

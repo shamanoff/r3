@@ -47,13 +47,12 @@ export class LoginComponent implements OnInit {
     // form is valid
     if (formData.valid) {
       // response is valid
-      this._af.auth.signInWithEmailAndPassword(formData.value.email,
+      this._authServ.emailLogin(formData.value.email,
         formData.value.password)
        .then(
          (user) => {
            this._authServ.authState.set(user);
-         // this._authServ.authState(user);
-       // this.router.navigateByUrl('/members');
+
        }).catch(err => {
          if(err.message === this.fireUserNotFound){
            this.notFound = true;
