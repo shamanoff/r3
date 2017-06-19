@@ -4,10 +4,16 @@ import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database
 import {AngularFireAuth} from 'angularfire2/auth';
 import {User} from './user';
 import {CountService} from "../counter/count.service";
+import {Subject} from "rxjs/Subject";
+import {Observable} from "rxjs/Observable";
 
 
 @Injectable()
 export class AuthService {
+
+  private errorSubject: Subject<any>;
+
+
   loginError: string;
   user$: FirebaseListObservable<User[]>;
   signUpError = '';
@@ -25,16 +31,29 @@ export class AuthService {
   constructor(private _afAuth: AngularFireAuth,
               private _db: AngularFireDatabase,
               private _router: Router,
-  private _cServ: CountService) {
+              private _cServ: CountService,
+              // public error$: Observable<any>,
+              // private errorSubject: Subject<any>,
 
-    this._afAuth.authState.subscribe((auth) => {
-      this._authState = auth;
-    });
+  ) {
+
+    // this.error$ = this.errorSubject.asObservable();
+
+    this
+      ._afAuth
+      .authState
+      .subscribe(
+        (auth) => {
+          this
+            ._authState = auth;
+        }
+      )
+    ;
 
   }
 
 
-  //// Get Users ////
+//// Get Users ////
 
   getUsers() {
     this.user$ = this._db.list('/users') as
@@ -42,7 +61,7 @@ export class AuthService {
     return this.user$;
   }
 
-  //// Email/Password Auth ////
+//// Email/Password Auth ////
 
   emailSignUp(email: string, password: string) {
     return this._afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -51,8 +70,8 @@ export class AuthService {
         this.updateUserData();
         this._cServ.updateUsersCounter();
       })
-      // .catch(err => console.log('signup - ' + err.message));
-      .catch(error => this.signUpError = error.message); // changed
+      // .catch(error => this.errorSubject.next(error));
+      // .catch(error => this.signUpError = error.message);
 
   }
 
@@ -69,7 +88,7 @@ export class AuthService {
   }
 
 
-  // Sends email allowing user to reset password
+// Sends email allowing user to reset password
   resetPassword(email: string) {
     const auth = this._afAuth.auth;
 
@@ -79,7 +98,7 @@ export class AuthService {
   }
 
 
-  //// Sign Out ////
+//// Sign Out ////
 
   signOut(): void {
     this._afAuth.auth.signOut();
@@ -87,33 +106,33 @@ export class AuthService {
   }
 
 
-  // Returns true if user is logged in
-  get authenticated(): boolean {
+// Returns true if user is logged in
+  get  authenticated(): boolean {
     return this._authState !== null;
   }
 
-  // Returns current user data
-  get currentUser(): any {
+// Returns current user data
+  get  currentUser(): any {
     return this.authenticated ? this._authState : null;
   }
 
-  // Returns
-  get currentUserObservable(): any {
+// Returns
+  get  currentUserObservable(): any {
     return this._afAuth.authState;
   }
 
-  // Returns current user UID
-  get currentUserId(): string {
+// Returns current user UID
+  get  currentUserId(): string {
     return this.authenticated ? this._authState.uid : '';
   }
 
-  // Anonymous User
-  get currentUserAnonymous(): boolean {
+// Anonymous User
+  get  currentUserAnonymous(): boolean {
     return this.authenticated ? this._authState.isAnonymous : false;
   }
 
-  // Returns current user display name or Guest
-  get currentUserDisplayName(): string {
+// Returns current user display name or Guest
+  get  currentUserDisplayName(): string {
     if (!this._authState) {
       return 'Guest';
     }
@@ -126,9 +145,10 @@ export class AuthService {
   }
 
 
-  //// Helpers ////
+//// Helpers ////
 
-  private updateUserData(): void {
+  private
+  updateUserData(): void {
     // Writes user name and email to realtime _db
     // useful if your app displays information about users or for admin features
 
@@ -142,7 +162,6 @@ export class AuthService {
       .catch(error => console.log(error));
 
   }
-
 
 
 }

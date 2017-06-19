@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private _authServ: AuthService) {
-    console.log(_authServ)
+
   }
 
   ngOnInit() {

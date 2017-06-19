@@ -13,6 +13,7 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  errorListener;
   state = '';
   error: any;
   signUpForm: FormGroup;
@@ -39,18 +40,20 @@ export class SignupComponent implements OnInit {
         .then(
           res => {
             this.router.navigateByUrl('/members');
-          }).catch(err => {
-          if (this._authServ.signUpError.includes(this.fireUserFound)) {
-            console.log(err.message + 'ERR');
+          })
+        // .catch(err => console.log(err + '!!!!!!'))
+        .catch(err => {
+          if (err.message.includes(this.fireUserFound)) {
             this.notFound = true;
           }
         }
       );
     }
-    console.log(' eeeee ' + this._authServ.signUpError);
+    // console.log(' error ' + this._authServ.signUpError);
     if (this._authServ.signUpError.includes(this.fireUserFound)) {
       this.notFound = true;
     }
+
  /*   if (!this.notFound) {
       this._cServ.updateUsersCounter();
     }*/
@@ -116,8 +119,15 @@ export class SignupComponent implements OnInit {
     passwordControl.valueChanges.debounceTime(1000).subscribe(
       value => this.setPasswordMessage(passwordControl)
     );
-  }
+    this.afterCheck();
 
+  }
+ afterCheck(){
+/*    this._authServ.error$.subscribe(
+      err => this.errorListener = err
+    );
+   console.log(this.errorListener + ' ERRORList')*/
+ }
   setEmailMessage(c: AbstractControl): void {
     this.emailMessage = '';
     if ((c.touched || c.dirty) && c.errors) {
