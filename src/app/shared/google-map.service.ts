@@ -15,7 +15,7 @@ export class GoogleMapService {
   };
   // marker$: Observable<Marker>;
 
-  constructor(private _http: Http, private _authServ: AuthService, private _db: AngularFireDatabase,) {
+  constructor(private _http: Http, private _authServ: AuthService, private _db: AngularFireDatabase) {
   }
 
   getInfo(street: string, city: string) {

@@ -1,0 +1,7 @@
+<div *ngFor="let post of userPost$ | async">
+  <div class="pic" [ngStyle]="{'background-image': 'url(' + post.pic + ')'}"></div>
+  <h4>{{post.title}}</h4>
+  <p>{{post.author}} | {{ post.date}}</p>
+  <p>{{post.text}}</p>
+  <a href="{{post.url}}">Полный текст</a>
+</div>

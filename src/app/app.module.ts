@@ -32,6 +32,8 @@ import { MapComponent } from './map/map.component';
 import { AboutComponent } from './about/about.component';
 import { CounterComponent } from './counter/counter.component';
 import {CountService} from "./counter/count.service";
+import { PostsComponent } from './posts/posts.component';
+import {PostsService} from "./posts/posts.service";
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -61,6 +63,7 @@ export const firebaseConfig = {
     MapComponent,
     AboutComponent,
     CounterComponent,
+    PostsComponent,
 
   ],
   imports: [
@@ -78,7 +81,7 @@ export const firebaseConfig = {
     }),
 
   ],
-  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService, FormsModule, CountService],
+  providers: [ AuthService, AuthGuard, FeedService, GoogleMapService, FormsModule, CountService, PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

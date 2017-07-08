@@ -25,21 +25,22 @@ export class MembersComponent implements OnInit, AfterViewInit {
 
   };
 
-  // form
-  editForm: FormGroup;
-  // validation
+
+/*  editForm: FormGroup;
   nameMessage: string;
   emailMessage: string;
   phoneMessage: string;
   ageMessage: string;
   cityMessage: string;
-  streetMessage: string;
-  private validationMessages = {
+  streetMessage: string;*/
+
+/*  private validationMessages = {
     required: 'Это поле обязательно.',
     minlength: 'Введите больше символов.',
     email: 'Введите правильный адрес электронной почты.',
 
-  };
+  };*/
+
   currentUser = {
     userPic: '',
     userName: '',
@@ -56,8 +57,8 @@ export class MembersComponent implements OnInit, AfterViewInit {
   editing = false;
   error;
   userId: string;
-  userEmail: string;
-  users: FirebaseListObservable<User[]>;
+/*  userEmail: string;
+  users: FirebaseListObservable<User[]>;*/
   user: Observable<firebase.User>;
 
   constructor(private _authServ: AuthService,
@@ -72,10 +73,6 @@ export class MembersComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.userId = this._authServ.currentUserId;
-    // this.setCurrentPosition();
-    // this.getCoordinates();
-
-
   }
 
   ngAfterViewInit(): void {
@@ -89,15 +86,7 @@ export class MembersComponent implements OnInit, AfterViewInit {
     );
   }
 
-  /*  setCurrentPosition() {
-   if ('geolocation' in navigator) {
-   navigator.geolocation.getCurrentPosition((position) => {
-   this.latitude = position.coords.latitude;
-   this.longitude = position.coords.longitude;
 
-   });
-   }
-   }*/
 
   getCoordinates() {
     this._mapServ.getInfo(this.currentUser.city, this.currentUser.street)
@@ -105,8 +94,7 @@ export class MembersComponent implements OnInit, AfterViewInit {
         (data: any) => {
           this.coordinates = _.get(data, ['results', '0', 'geometry', 'location']);
 
-          /*     this.currentUser.lat = ('' + _.get(data, ['results', '0', 'geometry', 'location', 'lat']));
-           this.currentUser.lng = ('' + _.get(data, ['results', '0', 'geometry', 'location', 'lng']));*/
+
         },
         (error) => console.log(error)
       );
@@ -122,8 +110,7 @@ export class MembersComponent implements OnInit, AfterViewInit {
       .catch(error => console.log(error));
     this.getUser();
     this.editing = false;
- /*   const user = this._af.auth.currentUser;
-    user.updateEmail(this.currentUser.email);*/
+
   };
 
 }
