@@ -24,4 +24,15 @@ export class PostsService {
     return this.post$;
   }
 
+  addPost(newPost) {
+    return this.post$.push(newPost);
+  }
+  updatePost(key, updPost){
+    return this.post$.update(key, updPost);
+  }
+  deletePost(key){
+    return this.post$.remove(key);
+
+  }
+
 }
