@@ -4,17 +4,16 @@ import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database
 import {AngularFireAuth} from 'angularfire2/auth';
 import {User} from './user';
 import {CountService} from "../counter/count.service";
-import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
+
 
 
 @Injectable()
 export class AuthService {
 
-  private errorSubject: Subject<any>;
+  // private errorSubject: Subject<any>;
 
 
-  loginError: string;
+  // loginError: string;
   user$: FirebaseListObservable<User[]>;
   signUpError = '';
   error = '';

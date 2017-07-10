@@ -11,7 +11,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 })
 export class LoginComponent implements OnInit {
 
-  state = '';
+  // state = '';
   error: any;
   notFound = false;
   invalid = false;
@@ -67,23 +67,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-/*  onSubmit(formData) {
-    // form is valid
-    if (formData.valid) {
-      // response is valid
-      this._authServ.emailLogin(formData.value.email, formData.value.password)
-               .then(
-           res => {
-           this.router.navigateByUrl('/members');
-
-           })
-           .catch((err) => {
-           console.log(err.message + ' err') ;
-           });
-    }
-    console.log(this._authServ.loginError + ' This signUpError');
-
-  }*/
 
 
   ngOnInit(): void {
