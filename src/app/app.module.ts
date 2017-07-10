@@ -35,6 +35,7 @@ import {CountService} from "./counter/count.service";
 import { PostsComponent } from './posts/posts.component';
 import {PostsService} from "./posts/posts.service";
 import {RssModule} from "./rss/rss.module";
+import { AddPostFormComponent } from './add-post-form/add-post-form.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -59,6 +60,7 @@ export const firebaseConfig = {
     AboutComponent,
     CounterComponent,
     PostsComponent,
+    AddPostFormComponent,
 
 
   ],

@@ -1,9 +1,8 @@
 export class Post{
   constructor(
-    public id: string,
     author: string,
     authorId: string,
-    date: number,
+    date: string,
     title?: string,
     text?: string,
     url?: string,
