@@ -1,0 +1,45 @@
+<form #formData='ngForm' novalidate
+      (ngSubmit)="onSubmit(formData)"
+      [formGroup]="postForm">
+
+
+  <div>
+    <label for="title">Заголовок</label>
+    <span class="error" *ngIf="lengthErrorMessage">{{ lengthErrorMessage }}</span>
+    <input [ngClass]="{'has-error': lengthErrorMessage}" class="form-control"
+           type="text"
+           value="{{currentPost.title}}"
+           formControlName="title"
+           id="title">
+  </div>
+  <div>
+    <label for="title">Текст</label>
+    <span class="error" *ngIf="lengthErrorMessage">{{ lengthErrorMessage }}</span>
+    <input [ngClass]="{'has-error': lengthErrorMessage}" class="form-control"
+           type="text"
+           value="{{currentPost.text}}"
+           formControlName="text"
+           id="text">
+  </div>
+  <div>
+    <label for="title">Ссылка на публикацию</label>
+    <span class="error" *ngIf="lengthErrorMessage">{{ lengthErrorMessage }}</span>
+    <input [ngClass]="{'has-error': lengthErrorMessage}" class="form-control"
+           type="text"
+           value="{{currentPost.url}}"
+           formControlName="url"
+           id="url">
+  </div>
+  <div>
+    <label for="title">Фото</label>
+    <span class="error" *ngIf="lengthErrorMessage">{{ lengthErrorMessage }}</span>
+    <input [ngClass]="{'has-error': lengthErrorMessage}" class="form-control"
+           type="text"
+           value="{{currentPost.pic}}"
+           formControlName="pic"
+           id="pic">
+  </div>
+  <button type="submit" class="button expanded" [disabled]="!postForm.valid ">
+    Отправить
+  </button>
+</form>
