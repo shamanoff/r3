@@ -18,22 +18,18 @@ import {AuthService} from './shared/auth.service';
 import {AuthGuard} from './shared/guard.service';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import {FeedService} from './feeds/feed.service';
-import { MigComponent } from './mig/mig.component';
-import { MeduzaComponent } from './meduza/meduza.component';
-import { NepComponent } from './nep/nep.component';
-import { MarkerComponent } from './marker/marker.component';
-import { NewsruComponent } from './newsru/newsru.component';
+import {FeedService} from './rss-module/feeds/feed.service';
+
 import { FooterComponent } from './footer/footer.component';
-import { CursorComponent } from './israelinfo/israelinfo.component';
 import { SamoComponent } from './samo/samo.component';
 import {GoogleMapService} from './shared/google-map.service';
 import { MapComponent } from './map/map.component';
 import { AboutComponent } from './about/about.component';
 import { CounterComponent } from './counter/counter.component';
 import {CountService} from "./counter/count.service";
-import { PostsComponent } from './posts/posts.component';
-import {PostsService} from "./posts/posts.service";
+import {PostsService} from "./post-module/posts/posts.service";
+import {RssModule} from "./rss-module/rss.module";
+import {PostModule} from "./post-module/post.module";
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyATGbZQMp9tkpVhFsxRJDScM6JirJMCGh0',
@@ -52,22 +48,19 @@ export const firebaseConfig = {
     MembersComponent,
     HeaderComponent,
     HomeComponent,
-    MigComponent,
-    MeduzaComponent,
-    NepComponent,
-    MarkerComponent,
-    NewsruComponent,
     FooterComponent,
-    CursorComponent,
     SamoComponent,
     MapComponent,
     AboutComponent,
     CounterComponent,
-    PostsComponent,
+
+
 
   ],
   imports: [
     BrowserModule,
+    PostModule,
+    RssModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),

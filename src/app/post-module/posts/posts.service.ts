@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
-import {AuthService} from '../shared/auth.service';
+import {AuthService} from '../../shared/auth.service';
 import {Http} from '@angular/http';
-import {Post} from '../shared/post';
+import {Post} from '../post';
 
 @Injectable()
 export class PostsService {
